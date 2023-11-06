@@ -81,10 +81,10 @@ let SearchCity = function(event) {
             localStorage.setItem('Searches', JSON.stringify(SearchHistory));
             SearchHistory = JSON.parse(localStorage.getItem('Searches'));
             newIndex--;
+            return newIndex;
+        }).then((newIndex) => {
             DisplayHistory(newIndex);
-        })
-        .then((newLen) => {
-            DisplayCity(newLen-1);
+            DisplayCity(newIndex);
         })
     } catch {
         IsLoading_Page = false;
