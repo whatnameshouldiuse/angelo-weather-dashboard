@@ -2,6 +2,12 @@
     border: 0;
     border-radius: 0.25rem;
     margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+header.rounded-section {
+    border-radius: 0 0 1rem 1rem;
+    background-color:rgb(187, 198, 235);
 }
 
 #Search-Container.rounded-section {
@@ -22,6 +28,11 @@
 
 #Forecast.rounded-section {
     background-color: rgb(227, 184, 236);
+}
+
+#Forecast .rounded-section {
+    background-color: rgb(239, 212, 245);
+    flex-shrink: 1;
 }
 
 .rounded-section button {

@@ -1,8 +1,6 @@
 // API Call: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 // Documentation: https://openweathermap.org/forecast5
 
-require('dotenv').config();
-
 //#region Class and Function Definitions
 class WeatherLocation {
     constructor(city, lat, lon) {
@@ -10,14 +8,6 @@ class WeatherLocation {
         this.lat = lat;
         this.lon = lon;
     }
-}
-
-/**
- * Used to compare a Weather Location object with the available input parameters
- * @param {WeatherLocation} comparingLoc 
- */
-WeatherLocation.prototype.isSame = function(cityName) {
-    return this.city === cityName;
 }
 //#endregion
 
@@ -56,10 +46,10 @@ var SearchHistory = JSON.parse(localStorage.getItem('Searches'));
  */
 let SearchCity = function(event) {
     IsLoading_Page = true;
-    let searchCityInput = IN_InputCity.text();
+    let searchCityInput = IN_InputCity[0].value;
 
     SearchHistory.forEach((search) => {
-        if (search.isSame(searchCityInput)) {
+        if (search.city === searchCityInput) {
             IsLoading_Page = false;
             return;
         }
@@ -70,7 +60,7 @@ let SearchCity = function(event) {
             'http://api.openweathermap.org/geo/1.0/direct?q='
             + searchCityInput +
             '&limit=1&appid='
-            + process.env.OPEN_WEATHER_KEY;
+            + '89af22d4e47b24ad78748695584c8e32';
         
         fetch(apiCall)
         .then((response) => {
@@ -80,22 +70,21 @@ let SearchCity = function(event) {
             return response.json();
         })
         .then((data) => {
+            if (data.length == 0){
+                throw true;
+            }
             var newIndex = SearchHistory.push(new WeatherLocation(
                 searchCityInput,
                 data[0].lat,
                 data[0].lon
             ));
             localStorage.setItem('Searches', JSON.stringify(SearchHistory));
+            SearchHistory = JSON.parse(localStorage.getItem('Searches'));
             newIndex--;
-            var historyButton = $('<button>');
-            historyButton.addClass('text-center')
-            historyButton.text('');
-            historyButton.on('click', DisplayCity(newIndex));
-            SECTION_SearchHistory.append(historyButton)
+            DisplayHistory(newIndex);
         })
         .then((newLen) => {
-            IN_InputCity.text('');
-            this.DisplayCity(newLen-1);
+            DisplayCity(newLen-1);
         })
     } catch {
         IsLoading_Page = false;
@@ -116,19 +105,19 @@ let DisplayCity = function(index) {
 
     try {
         var apiCall = 
-            'api.openweathermap.org/data/2.5/forecast?lat='
+            'http://api.openweathermap.org/data/2.5/forecast?lat='
             + SearchHistory[index].lat +
             '&lon=' 
             + SearchHistory[index].lon +
             '&appid='
-            + process.env.OPEN_WEATHER_KEY +
+            + '89af22d4e47b24ad78748695584c8e32' +
             '&units=imperial';
         fetch(apiCall)
         .then((response) => {
             if (!response) {
                 throw true;
             }
-            return json.parse(response);
+            return response.json();
         })
         .then((data) => {
             const weatherList = data.list;
@@ -145,13 +134,13 @@ let DisplayCity = function(index) {
                 if (listI == 40) listI--;
 
                 editLabels.eq(0).text(data.city.name);
-                editLabels.eq(1).text(new Date(weatherList[listI].item.dt * 1000).toLocaleDateString('en-US'));
+                editLabels.eq(1).text(new Date(weatherList[listI].dt * 1000).toLocaleDateString('en-US'));
                 editLabels.eq(2).attr('src', () => {
                     return 'https://openweathermap.org/img/wn/' + weatherList[listI].weather[0].icon + '.png';
                 });
-                editLabels.eq(3).text(weatherList[listI].main.temp + '°F');
-                editLabels.eq(4).text(weatherList[listI].wind.speed + '/mph');
-                editLabels.eq(5).text(weatherList[listI].main.humidity + '%');
+                editLabels.eq(3).text('Temperature: ' + weatherList[listI].main.temp + '°F');
+                editLabels.eq(4).text('Wind: ' + weatherList[listI].wind.speed + '/mph');
+                editLabels.eq(5).text('Humidity: ' + weatherList[listI].main.humidity + '%');
             }
         });
     } catch {
@@ -160,17 +149,30 @@ let DisplayCity = function(index) {
     }
 }
 
-/**
- * 
- */
 let ResetInputs = function() {
     localStorage.setItem('Searches', JSON.stringify([]));
     SECTION_SearchHistory.children().off();
     SECTION_SearchHistory.html('');
 }
+
+let DisplayHistory = function(index) {
+    var historyButton = $('<button>');
+    historyButton.addClass('text-center b-0 mb-2 btn btn-success col')
+    historyButton.attr('data-index', index);
+    historyButton.text(SearchHistory[index].city);
+    historyButton.on('click', {index: historyButton.attr('data-index')}, function(event) {
+        DisplayCity(event.data.index);
+    });
+    SECTION_SearchHistory.append(historyButton);
+}
+
 //#endregion
 
 //#region Add Event Listeners
 BTN_SearchCity.on('click', SearchCity);
 BTN_ResetSearchHistory.on('click', ResetInputs)
 //#endregion
+
+SearchHistory.forEach((history, index) => {
+    DisplayHistory(index);
+});

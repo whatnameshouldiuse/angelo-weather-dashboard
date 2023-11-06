@@ -14,37 +14,37 @@
     <reference path="./jquery-3.5.1.js" />
 </head>
 <body>
-    <header>
-
+    <header class="rounded-section">
+        <h3>Weather Dashboard</h3>
     </header>
-    <div>
-        <aside class="col-md-2 container p-3">
-            <section id="Search-Container" class="rounded-section">
+    <div class="d-flex col-10 offset-1">
+        <aside class="col-md-3 p-2">
+            <section id="Search-Container" class="container rounded-section">
                 <label for="Input-City" class="form-label">Search City</label>
                 <input type="text" class="form-control" id="Input-City"/>
-                <div class="row d-flex justify-content-around">
-                    <button id="Search-City" class="btn btn-primary"></button>
-                    <button id="Reset-Search-History" class="btn btn-primary"></button>
+                <div class="d-flex justify-content-around mt-3">
+                    <button id="Search-City" class="btn btn-primary">Search City</button>
+                    <button id="Reset-Search-History" class="btn btn-primary">Reset History</button>
                 </div>
             </section>
-            <section id="Search-History" class="rounded-section">
+            <section id="Search-History" class="rounded-section d-flex flex-column">
 
             </section>
         </aside>
-        <main class="col-md-10 container p-3">
-            <section id="No-Search" class="rounded-section">
+        <main class="col-md-9 p-3">
+            <section id="No-Search" class="container rounded-section">
                 There is no search item loaded. Please search a city, or select a previously searched city!
             </section>
             <section id="Current-Weather" class="rounded-section" hidden>
-                <h6>City</h6>
+                <h4>City</h4>
                 <p>Date</p>
                 <img aria>
                 <p>Temperature by F</p>
                 <p>Wind Speed</p>
                 <p>humidity</p>
             </section>
-            <section id="Forecast" class="rounded-section" hidden>
-                <div>
+            <section id="Forecast" class="row justify-content-around" hidden>
+                <div class="col rounded-section">
                     <h6>City</h6>
                     <p>Date</p>
                     <img aria>
@@ -52,7 +52,7 @@
                     <p>Wind Speed</p>
                     <p>humidity</p>
                 </div>
-                <div>
+                <div class="col rounded-section">
                     <h6>City</h6>
                     <p>Date</p>
                     <img aria>
@@ -60,7 +60,7 @@
                     <p>Wind Speed</p>
                     <p>humidity</p>
                 </div>
-                <div>
+                <div class="col rounded-section">
                     <h6>City</h6>
                     <p>Date</p>
                     <img aria>
@@ -68,7 +68,7 @@
                     <p>Wind Speed</p>
                     <p>humidity</p>
                 </div>
-                <div>
+                <div class="col rounded-section">
                     <h6>City</h6>
                     <p>Date</p>
                     <img aria>
@@ -76,7 +76,7 @@
                     <p>Wind Speed</p>
                     <p>humidity</p>
                 </div>
-                <div>
+                <div class="col rounded-section">
                     <h6>City</h6>
                     <p>Date</p>
                     <img aria>
