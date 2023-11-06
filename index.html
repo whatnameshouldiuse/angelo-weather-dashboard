@@ -8,8 +8,85 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- https://getbootstrap.com/docs/5.0/getting-started/introduction/ -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/a624b9117e.js" crossorigin="anonymous"></script>
+    <reference path="./jquery-3.5.1.js" />
 </head>
 <body>
+    <header>
+
+    </header>
+    <div>
+        <aside class="col-md-2 container p-3">
+            <section id="Search-Container" class="rounded-section">
+                <label for="Input-City" class="form-label">Search City</label>
+                <input type="text" class="form-control" id="Input-City"/>
+                <div class="row d-flex justify-content-around">
+                    <button id="Search-City" class="btn btn-primary"></button>
+                    <button id="Reset-Search-History" class="btn btn-primary"></button>
+                </div>
+            </section>
+            <section id="Search-History" class="rounded-section">
+
+            </section>
+        </aside>
+        <main class="col-md-10 container p-3">
+            <section id="No-Search" class="rounded-section">
+                There is no search item loaded. Please search a city, or select a previously searched city!
+            </section>
+            <section id="Current-Weather" class="rounded-section" hidden>
+                <h6>City</h6>
+                <p>Date</p>
+                <img aria>
+                <p>Temperature by F</p>
+                <p>Wind Speed</p>
+                <p>humidity</p>
+            </section>
+            <section id="Forecast" class="rounded-section" hidden>
+                <div>
+                    <h6>City</h6>
+                    <p>Date</p>
+                    <img aria>
+                    <p>Temperature by F</p>
+                    <p>Wind Speed</p>
+                    <p>humidity</p>
+                </div>
+                <div>
+                    <h6>City</h6>
+                    <p>Date</p>
+                    <img aria>
+                    <p>Temperature by F</p>
+                    <p>Wind Speed</p>
+                    <p>humidity</p>
+                </div>
+                <div>
+                    <h6>City</h6>
+                    <p>Date</p>
+                    <img aria>
+                    <p>Temperature by F</p>
+                    <p>Wind Speed</p>
+                    <p>humidity</p>
+                </div>
+                <div>
+                    <h6>City</h6>
+                    <p>Date</p>
+                    <img aria>
+                    <p>Temperature by F</p>
+                    <p>Wind Speed</p>
+                    <p>humidity</p>
+                </div>
+                <div>
+                    <h6>City</h6>
+                    <p>Date</p>
+                    <img aria>
+                    <p>Temperature by F</p>
+                    <p>Wind Speed</p>
+                    <p>humidity</p>
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="./assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
